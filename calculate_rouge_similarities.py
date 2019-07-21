@@ -4,11 +4,12 @@ from nltk.tokenize import sent_tokenize
 import calculateRouge
 import numpy as np
 import time
+import pandas as pd
 
 from summary_utils import *
 
 
-def extractRouge(analyzedData, systemNames, summaryLengths):
+def extract_rouge(analyzedData, systemNames, summaryLengths):
     '''
     Outputs the analyzedData to a CSV file with the format:
     ROUGE_type,<summLen1>_r,<summLen2>_r,<summLenK>_r,<summLen1>_p,<summLen2>_p,<summLenK>_p,<summLen1>_f,<summLen2>_f,<summLenK>_f
@@ -82,11 +83,11 @@ if __name__ == "__main__":
     summ_topic = args.ref_summ
 
     #Sentence Splitting the document and reference summary
-    num_doc_sent = doc_sentences_extract(args.input_doc, args.doc_sent_dir, doc_topic)
-    num_summ_sent = summ_sentences_extract(args.input_summ, args.summ_sent_dir, summ_topic)
+    doc_sent = doc_sentences_extract(args.input_doc, args.doc_sent_dir, doc_topic)
+    summ_sent = summ_sentences_extract(args.input_summ, args.summ_sent_dir, summ_topic)
 
     #creating a rouge matrix where each sentence is compared to every other sentence
-    rouge_mat = np.zeros((len(num_doc_sent),len(num_summ_sent)))
+    rouge_mat = np.zeros((len(doc_sent),len(summ_sent)))
 
     #Deleting Mac files
     if os.path.exists(os.path.abspath(args.doc_sent_dir + "/.DS_STORE")): os.remove(os.path.abspath(args.doc_sent_dir+ "/.DS_STORE"))
@@ -97,8 +98,10 @@ if __name__ == "__main__":
     For each summary sentence, we calculate ROUGE scores of all document sentences and save single output to csv, as well as
     a Rouge matrix which contains all doc sentences, compared to all ref summary sentence.
     '''
+    summary_rouge_sim_indicies = []
+
     for summ_sent_idx, summ_dir in enumerate(os.listdir(args.summ_sent_dir)):
-        print("summary, ", summ_dir, summ_sent_idx)
+        print("summary sent , ", summ_dir)
 
         INPUTS = [(calculateRouge.COMPARE_SAME_LEN, os.path.join(args.summ_sent_dir,summ_dir),args.doc_sent_dir, None, None, calculateRouge.LEAVE_STOP_WORDS)]
         print("Inputs ", INPUTS)
@@ -116,14 +119,35 @@ if __name__ == "__main__":
         # get ROUGE scores:
         allData = calculateRouge.runRougeCombinations(compareType, sysFolder, refFolder, systemNames, summaryLengths,
                                                       ducVersion, stopWordsRemoval)
-        # output scores to CSV:
-        calculateRouge.outputToCsv(allData, os.path.join(args.summ_sent_dir,summ_dir,"rouge_sim.csv"), systemNames, summaryLengths)
-        rouge_vec = extractRouge(allData, systemNames, summaryLengths)
-        rouge_mat[:, summ_sent_idx] = rouge_vec
+        sents_list = []
+        for k,v in allData.items():
+            for i in summaryLengths:
+                if i in v:
+                    sents_list.append((doc_sent[int(k)],k, i, v[i]["R1"]["f1"], v[i]["R2"]["f1"], v[i]["R3"]["f1"], v[i]["RL"]["f1"], v[i]["RS"]["f1"]))
+
+
+        # Output scores to CSV - taking only F1 scores of - R1,R2,R3,RL,RS
+
+        #calculateRouge.outputToCsv(allData, os.path.join(args.summ_sent_dir,summ_dir,"rouge_sim.csv"), systemNames, summaryLengths)
+        df = pd.DataFrame(sents_list, columns = [summ_sent[int(summ_dir)],"sent_index", "summary_length", "R1-F1", "R2-F1", "R3-F1", "RL-F1", "RS-F1"])
+
+        #Calculating rouge avergae of R1,R2, and RL as was done in Fei Liu's abstract summarization paper
+        df["rouge_avg"] = (df["R1-F1"] + df["R2-F1"] + df["RL-F1"]) / 3
+
+        df.to_csv("rouge_similarities/"+taskNames[0]+"-summary_sent_"+str(summ_dir)+".csv", index=False)
+        df = df.sort_values(by=["rouge_avg"], ascending=False).reset_index(drop=True)
+
+        summary_rouge_sim_indicies.append((summ_dir, summ_sent[int(summ_dir)], df.loc[0,"sent_index"]+":" + df.loc[0,df.columns[0]], df.loc[1,"sent_index"]+":" +df.loc[1,df.columns[0]], df.loc[2,"sent_index"]+":" + df.loc[2,df.columns[0]]))
+        #rouge_vec = extract_rouge(allData, systemNames, summaryLengths)
+        #rouge_mat[:, summ_sent_idx] = rouge_vec
         curTime = time.time()
         print('Current input done! Elapsed time: {} seconds!'.format(curTime - startTime))
-        exit(0)
-    np.savetxt("rouge_matrix.csv", rouge_mat, delimiter=",")
+
+
+    #np.savetxt("rouge_matrix.csv", rouge_mat, delimiter=",")
+    sim_df = pd.DataFrame(summary_rouge_sim_indicies, columns=["summary_index","summary_sent", "best-avg-rouge-01","best-avg-rouge-02", "best-avg-rouge-03"])
+    sim_df= sim_df.sort_values(by=["summary_index"])
+    sim_df.to_csv("rouge_similarities/summaries_and_best_doc_sents.csv", index=False)
     print('---- DONE WITH ALL INPUTS')
 
 

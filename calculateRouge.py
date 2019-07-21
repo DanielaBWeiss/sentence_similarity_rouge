@@ -8,10 +8,14 @@ To run: python calculateRouge.py
 Outputs: a CSV file with the ROUGE scores
 '''
 
-import os
+import sys, os
 from pyrouge import Rouge155
 import time
+import logging
 
+# Disable
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
 
 
 # The comparison types between system and model summaries:
@@ -63,7 +67,7 @@ INPUTS = [(COMPARE_VARYING_LEN, refFolder, sysFolder, outputFolder, 2002, LEAVE_
     # (COMPARE_TO_SMALLEST, 'data/DUC2002/SEE.model_edited.abstracts.in.edus', 'data/DUC2002/SEE.peer_abstracts.in.sentences', '2002_to010_noStops.csv', 2002, REMOVE_STOP_WORDS),
     # (COMPARE_TO_ONE_SMALLER, 'data/DUC2001/see.models', 'data/DUC2001/submissions.for.SEE', '2001_toOneShorter_noStops.csv', 2001, REMOVE_STOP_WORDS)
     # ]
-    
+
 def getComparisonOptions(folderSystems, folderModels):
     '''
     Gets all the task names, summary lengths and system names from the system filenames of the Multi-doc summaries.
@@ -71,8 +75,8 @@ def getComparisonOptions(folderSystems, folderModels):
         example: D061.M.010.J.16.txt
     or <taskName>.<M for Multi/P for Perdoc>.<summLen>.<AssessorId>.<systemId>.<singleFileName>.<txt/html> for single-text
         example: D061.P.100.J.16.AP880916-0060.txt
-        
-    Returns three orderer list of: taskNames, systemNames, summaryLengths
+
+    Returns three ordered list of: taskNames, systemNames, summaryLengths
     '''
     # keep the info for the multi-doc and per-doc separately:
     taskNames = {'M':{},'P':{}}
@@ -81,27 +85,26 @@ def getComparisonOptions(folderSystems, folderModels):
 
     # iterate through the filenames and keep the info according to the filename parts:
     for filename in os.listdir(folderSystems):
-        if ".DS" in filename: continue
         nameParts = filename.split('.')
         if len(nameParts) < 5:
             continue
-            
+
         taskName = nameParts[0]
         summaryLength = nameParts[2]
         systemName = nameParts[4]
-        
+
         # MultiDoc (e.g.: D061.M.010.J.16.txt)
         if nameParts[1] == 'M':
             taskNames['M'][taskName] = 1
             summaryLengths['M'][summaryLength] = 1
             systemNames['M'][systemName] = 1
-            
+
         # PerDoc (e.g.: D061.P.100.J.16.AP880916-0060.txt)
         elif nameParts[1] == 'P':
             taskNames['P'][taskName] = 1
             summaryLengths['P'][summaryLength] = 1
             systemNames['P'][systemName] = 1
-            
+
     # remove the model names from the system names found:
     for filename in os.listdir(folderModels):
         nameParts = filename.split('.')
@@ -112,14 +115,14 @@ def getComparisonOptions(folderSystems, folderModels):
             del systemNames['M'][modelName]
         elif nameParts[1] == 'P' and modelName in systemNames['P']:
             del systemNames['P'][modelName]
-    
+
     # take just the multi-doc info and sort it:
     taskNames = sorted(taskNames['M'].keys())
     systemNames = sorted(systemNames['M'].keys())
     summaryLengths = sorted(summaryLengths['M'].keys())
-    
+
     return taskNames, systemNames, summaryLengths
-    
+
 def initDataStructure(systemNames, summaryLengths):
     '''
     To initialize a data strucure for all the ROUGE values.
@@ -128,7 +131,7 @@ def initDataStructure(systemNames, summaryLengths):
         |_  summary_length
             |_  rouge_type (from ROUGE_TYPES keys)
                 |_  < precision=-1 | recall=-1 | f1=-1 >
-    
+
     Returns a newly created dictionary.
     '''
     data = {}
@@ -139,7 +142,7 @@ def initDataStructure(systemNames, summaryLengths):
             for rougeType in ROUGE_TYPES:
                 data[sysName][summLen][rougeType] = {'precision':-1, 'recall':-1, 'f1':-1}
     return data
-    
+
 def storeData(dataStruct, sysName, summLen, newData):
     '''
     Stores the Rouge155 module dictionary information into the dataStruct provided at
@@ -165,16 +168,17 @@ def runRougeCombinations(comparisonType, folderSystems, folderModels, systemName
     Returns a dictionary of the format specified in the initDataStructure method.
     '''
     print('Calculating all ROUGE scores...')
-    
+
     # initialize the ROUGE object:
     rougeCalculator = Rouge155()
-                
+    # Suppressing logger calls
+    rougeCalculator.log.level = logging.CRITICAL
     # initialize the data structure to hold all the ROUGE results:
     allData = initDataStructure(systemNames, summaryLengths)
-    
+
     # for each system get the ROUGE results separately:
     for sysName in systemNames:
-        print('\t--- On system: {} ---'.format(sysName))
+        #print('\t--- On system: {} ---'.format(sysName))
         
         # for each summary length get the ROUGE results separately:
         for summLen in summaryLengths:
