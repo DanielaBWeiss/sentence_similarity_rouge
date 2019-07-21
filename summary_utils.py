@@ -19,15 +19,14 @@ def doc_sentences_extract(input_doc, doc_sent_dir, topic, multi_doc=False):
     if multi_doc:
         sentences = []
         for filename in os.listdir(input_doc):
-            if os.path.isfile(filename):
-                with open(input_doc +"/" + filename,'r') as f:
-                    doc = f.read()
-                sentences.extend(split_sentences(doc))
+            if os.path.isdir(input_doc +"/" + filename):
+            with open(input_doc +"/" + filename,'r') as f:
+                doc = f.read()
+            sentences.extend(split_sentences(doc))
     else:
         with open(input_doc, 'r') as f:
             doc = f.read()
         sentences = split_sentences(doc)
-
 
     if not os.path.exists(doc_sent_dir):
         os.makedirs(doc_sent_dir)
