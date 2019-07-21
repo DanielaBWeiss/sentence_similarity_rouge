@@ -9,10 +9,25 @@ def split_sentences(raw_text):
     return sentences
 
 #creating a file for each sentence in the input document
-def doc_sentences_extract(input_doc, doc_sent_dir, topic):
-    with open(input_doc,'r') as f:
-        doc = f.read()
-    sentences = split_sentences(doc)#sent_tokenize(doc)
+'''
+Creating a filef or each sentence in an input document.
+If multi_doc option is passed, then the input_doc represents a 'topic' directory where documents reside.
+Else, the input_doc represents the document file.
+'''
+def doc_sentences_extract(input_doc, doc_sent_dir, topic, multi_doc=False):
+
+    if multi_doc:
+        sentences = []
+        for filename in os.listdir(input_doc):
+            if os.path.isfile(filename):
+                with open(input_doc +"/" + filename,'r') as f:
+                    doc = f.read()
+                sentences.extend(split_sentences(doc))
+    else:
+        with open(input_doc, 'r') as f:
+            doc = f.read()
+        sentences = split_sentences(doc)
+
 
     if not os.path.exists(doc_sent_dir):
         os.makedirs(doc_sent_dir)
@@ -36,3 +51,11 @@ def summ_sentences_extract(input_summ, summ_sent_dir, ref_summary):
         with open(html_path, 'w') as f:
             f.write(sentence)
     return {k:v for k,v in enumerate(sentences)}
+
+
+def delete_mac_files(directories):
+    for dir in directories:
+        # Deleting Mac files
+        if os.path.exists(os.path.abspath(dir + "/.DS_STORE")): os.remove(
+            os.path.abspath(dir + "/.DS_STORE"))
+

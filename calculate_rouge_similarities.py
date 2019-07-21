@@ -56,6 +56,7 @@ if __name__ == "__main__":
     parser.add_argument("--input_summ", default=None, type=str, required=True)
     parser.add_argument("--doc_sent_dir", default=r'C:\Users\user\Documents\Phd\rouge\SummEval_referenceSubsets\code_score_extraction\doc_sentences', type=str)
     parser.add_argument("--summ_sent_dir", default=r'C:\Users\user\Documents\Phd\rouge\SummEval_referenceSubsets\code_score_extraction\summ_sentences', type=str)
+    parser.add_argument("--multi-doc", default=False, action='store_true')
     parser.add_argument("--topic", default='D30001.M.100.T.', type=str)
     parser.add_argument("--ref_summ", default='D30001.M.100.T.A', type=str)
     # parser.add_argument("--bert_model", default=None, type=str, required=True,
@@ -81,18 +82,19 @@ if __name__ == "__main__":
 
     doc_topic = args.topic
     summ_topic = args.ref_summ
+    multi_doc = args.multi_doc
+
+    # Deleting Mac files
+    delete_mac_files([args.doc_sent_dir,args.summ_sent_dir, args.input_doc])
+
 
     #Sentence Splitting the document and reference summary
-    doc_sent = doc_sentences_extract(args.input_doc, args.doc_sent_dir, doc_topic)
+    doc_sent = doc_sentences_extract(args.input_doc, args.doc_sent_dir, doc_topic, multi_doc)
     summ_sent = summ_sentences_extract(args.input_summ, args.summ_sent_dir, summ_topic)
 
+    exit(0)
     #creating a rouge matrix where each sentence is compared to every other sentence
     rouge_mat = np.zeros((len(doc_sent),len(summ_sent)))
-
-    #Deleting Mac files
-    if os.path.exists(os.path.abspath(args.doc_sent_dir + "/.DS_STORE")): os.remove(os.path.abspath(args.doc_sent_dir+ "/.DS_STORE"))
-    if os.path.exists(os.path.abspath(args.summ_sent_dir + "/.DS_STORE")): os.remove(os.path.abspath(args.summ_sent_dir + "/.DS_STORE"))
-
 
     '''
     For each summary sentence, we calculate ROUGE scores of all document sentences and save single output to csv, as well as
