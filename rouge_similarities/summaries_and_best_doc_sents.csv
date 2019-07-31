@@ -1,7 +1,36 @@
 summary_index,summary_sent,best-avg-rouge-01,best-avg-rouge-02,best-avg-rouge-03
-0,Prospects were dim for resolution of the political crisis in Cambodia in October 1998.,"0:Cambodian leader Hun Sen on Friday rejected opposition parties' demands for talks outside the country, accusing them of trying to ``internationalize'' the political crisis.","6:It is detrimental to the sovereignty of Cambodia,'' he said.","4:``I would like to make it clear that all meetings related to Cambodian affairs must be conducted in the Kingdom of Cambodia,'' Hun Sen told reporters after a Cabinet meeting on Friday."
-1,"Prime Minister Hun Sen insisted that talks take place in Cambodia while opposition leaders Ranariddh and Sam Rainsy, fearing arrest at home, wanted them abroad.","2:Opposition leaders Prince Norodom Ranariddh and Sam Rainsy, citing Hun Sen's threats to arrest opposition figures after two alleged attempts on his life, said they could not negotiate freely in Cambodia and called for talks at Sihanouk's residence in Beijing.",8:Ranariddh and Sam Rainsy have charged that Hun Sen's victory in the elections was achieved through widespread fraud.,10:Hun Sen said on Friday that the opposition concerns over their safety in the country was ``just an excuse for them to stay abroad.''
-2,King Sihanouk declined to chair talks in either place.,"2:Opposition leaders Prince Norodom Ranariddh and Sam Rainsy, citing Hun Sen's threats to arrest opposition figures after two alleged attempts on his life, said they could not negotiate freely in Cambodia and called for talks at Sihanouk's residence in Beijing.",1:Government and opposition parties have asked King Norodom Sihanouk to host a summit meeting after a series of post-election negotiations between the two opposition groups and Hun Sen's party to form a new government failed.,"6:It is detrimental to the sovereignty of Cambodia,'' he said."
-3,A U.S. House resolution criticized Hun Sen's regime while the opposition tried to cut off his access to loans.,"0:Cambodian leader Hun Sen on Friday rejected opposition parties' demands for talks outside the country, accusing them of trying to ``internationalize'' the political crisis.",10:Hun Sen said on Friday that the opposition concerns over their safety in the country was ``just an excuse for them to stay abroad.'',"7:Hun Sen's Cambodian People's Party won 64 of the 122 parliamentary seats in July's elections, short of the two-thirds majority needed to form a government on its own."
-4,But in November the King announced a coalition government with Hun Sen heading the executive and Ranariddh leading the parliament.,"14:The Sam Rainsy Party, in a statement released Friday, accused Hun Sen of being ``unwilling to make any compromise'' on negotiations to break the deadlock.",8:Ranariddh and Sam Rainsy have charged that Hun Sen's victory in the elections was achieved through widespread fraud.,"7:Hun Sen's Cambodian People's Party won 64 of the 122 parliamentary seats in July's elections, short of the two-thirds majority needed to form a government on its own."
-5,"Left out, Sam Rainsy sought the King's assurance of Hun Sen's promise of safety and freedom for all politicians.",8:Ranariddh and Sam Rainsy have charged that Hun Sen's victory in the elections was achieved through widespread fraud.,12:Sam Rainsy and a number of opposition figures have been under court investigation for a grenade attack on Hun Sen's Phnom Penh residence on Sep. 7.,"2:Opposition leaders Prince Norodom Ranariddh and Sam Rainsy, citing Hun Sen's threats to arrest opposition figures after two alleged attempts on his life, said they could not negotiate freely in Cambodia and called for talks at Sihanouk's residence in Beijing."
+0,"Cambodian elections, fraudulent according to opposition parties, gave the CPP of Hun Sen a scant majority but not enough to form its own government.
+","7/7:Hun Sen's party won 64 of the 122 seats in parliament in July's national election, but not the two-thirds majority necessary to form a government on its own.
+","9/7:Hun Sen's Cambodian People's Party won 64 of the 122 parliamentary seats in July's elections, short of the two-thirds majority needed to form a government on its own.
+","2/22:The CPP fell short of the two-thirds majority needed to form a government alone.
+"
+1,"Opposition leaders fearing arrest, or worse, fled and asked for talks outside the country.
+","9/0:Cambodian leader Hun Sen on Friday rejected opposition parties' demands for talks outside the country, accusing them of trying to ``internationalize'' the political crisis.
+","7/11:Ranariddh and Sam Rainsy have remained outside the country since the Sept. 24 ceremonial convening of parliament.
+","9/11:Both Ranariddh and Sam Rainsy have been outside the country since parliament was ceremonially opened on Sep. 24.
+"
+2,"Han Sen refused.
+","9/3:Hun Sen, however, rejected that.
+","6/15:``I think Hun Sen has got everything.
+","7/21:Hun Sen ordered police to break up the demonstrations.
+"
+3,"The UN found evidence of rights violations by Hun Sen prompting the US House to call for an investigation.
+","8/8:The agreement will make Hun Sen prime minister and Ranariddh president of the National Assembly.
+","4/1:The Cambodian People's Party criticized a non-binding resolution passed earlier this month by the U.S. House of Representatives calling for an investigation into violations of international humanitarian law allegedly committed by Hun Sen. Events mentioned in the resolution include Hun Sen's coup last year against his co-prime minister, Prince Norodom Ranariddh, and his violent crackdown in September against anti-government demonstrations.
+","7/21:Hun Sen ordered police to break up the demonstrations.
+"
+4,"The three-month governmental deadlock ended with Han Sen and his chief rival, Prince Norodom Ranariddh sharing power.
+","6/3:But a deal reached between Hun Sen and his chief rival, Prince Norodom Ranariddh, on forming a new government last week has opened the door for their return.
+","5/0:Cambodian politicians expressed hope Monday that a new partnership between the parties of strongman Hun Sen and his rival, Prince Norodom Ranariddh, in a coalition government would not end in more violence.
+","0/2:Uncompromising enemies just a few months ago, Hun Sen and FUNCINPEC President Prince Norodom Ranariddh agreed Nov. 13 to form a government at a summit convened by Sihanouk.
+"
+5,"Han Sen guaranteed safe return to Cambodia for all opponents but his strongest critic, Sam Rainsy, remained wary.
+","6/10:Ranariddh told reporters Wednesday that he believed it was safe for Sam Rainsy in Cambodia.
+","1/9:``Some (opposition politicians) have wanted the United Nations to help guarantee a safe return for them.''
+","5/18:Sam Rainsy, a virulent critic of Hun Sen, and his party's 14 other members of parliament have remained outside Cambodia since September amid fears for their security.
+"
+6,"Chief of State King Norodom Sihanouk praised the agreement.
+","2/5:Chea Sim will still serve as acting head of state during the king's frequent absences from the country.
+","1/14:Diplomatic efforts to revive the stalled talks appeared to bear fruit Monday as Japanese Foreign Affairs Secretary of State Nobutaka Machimura said King Norodom Sihanouk has called on Ranariddh and Sam Rainsy to return to Cambodia.
+","6/4:In a letter to King Norodom Sihanouk _ the prince's father and Cambodia's head of state _ that was broadcast on television Tuesday, Hun Sen said that guarantees of safety extended to Ranariddh applied to all politicians.
+"

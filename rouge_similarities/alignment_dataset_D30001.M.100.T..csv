@@ -1,0 +1,27 @@
+summary_index,summary_sent,01-sentence,01-avgF1_rouge,02-overlap-sentence,02-overlap-avgF1_rouge,03-overlap-sentence,03-overlap-avgF1_rouge
+0,"Cambodian elections, fraudulent according to opposition parties, gave the CPP of Hun Sen a scant majority but not enough to form its own government.
+","7/7:Hun Sen's party won 64 of the 122 seats in parliament in July's national election, but not the two-thirds majority necessary to form a government on its own.
+",0.32909666666666665,"9/0:Cambodian leader Hun Sen on Friday rejected opposition parties' demands for talks outside the country, accusing them of trying to ``internationalize'' the political crisis.
+",0.20230666666666663,,
+1,"Opposition leaders fearing arrest, or worse, fled and asked for talks outside the country.
+","9/0:Cambodian leader Hun Sen on Friday rejected opposition parties' demands for talks outside the country, accusing them of trying to ``internationalize'' the political crisis.
+",0.3021433333333334,"3/10:Fearing arrest, many opposition members of Parliament left Cambodia after the ceremonial opening of the National Assembly on Sep. 24.
+",0.15714333333333333,,
+2,"Han Sen refused.
+",,,,,,
+3,"The UN found evidence of rights violations by Hun Sen prompting the US House to call for an investigation.
+","8/8:The agreement will make Hun Sen prime minister and Ranariddh president of the National Assembly.
+",0.19730666666666666,,,,
+4,"The three-month governmental deadlock ended with Han Sen and his chief rival, Prince Norodom Ranariddh sharing power.
+","6/3:But a deal reached between Hun Sen and his chief rival, Prince Norodom Ranariddh, on forming a new government last week has opened the door for their return.
+",0.3669266666666667,"2/0:Cambodia's bickering political parties broke a three-month deadlock Friday and agreed to a coalition government leaving strongman Hun Sen as sole prime minister, King Norodom Sihanouk announced.
+",0.16343333333333332,"1/11:The monitoring ended Sept. 30.
+",0.17778000000000002
+5,"Han Sen guaranteed safe return to Cambodia for all opponents but his strongest critic, Sam Rainsy, remained wary.
+","6/10:Ranariddh told reporters Wednesday that he believed it was safe for Sam Rainsy in Cambodia.
+",0.20332000000000003,,,"6/0:Cambodian leader Hun Sen has guaranteed the safety and political freedom of all politicians, trying to ease the fears of his rivals that they will be arrested or killed if they return to the country.
+",0.12560666666666667
+6,"Chief of State King Norodom Sihanouk praised the agreement.
+","2/5:Chea Sim will still serve as acting head of state during the king's frequent absences from the country.
+",0.2161233333333333,,,"7/0:King Norodom Sihanouk has declined requests to chair a summit of Cambodia's top political leaders, saying the meeting would not bring any progress in deadlocked negotiations to form a government.
+",0.14517000000000002
