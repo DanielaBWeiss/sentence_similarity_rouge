@@ -54,13 +54,13 @@ INPUT_FORMAT = FORMAT_TEXT
 # THE INPUTS TO RUN IN A LOOP - CHANGE YOUR INPUTS HERE:
 # Each input: (comparisonType, modelSummariesFolderPath, systemSummariesFolderPath, outputCSVfilepath, DUC year [2001|2002], stopWordsMode)
 
-refFolder = 'example_gold'
-sysFolder = 'example_system'
-outputFolder = 'practice_rouge_output_3c.csv'
+refFolder = 'example_summ'
+sysFolder = 'example_docs'
+outputFolder = 'practice_rouge_output.csv'
 if os.path.exists(os.path.abspath(refFolder + "/.DS_STORE")): os.remove(os.path.abspath(refFolder + "/.DS_STORE"))
 if os.path.exists(os.path.abspath(sysFolder + "/.DS_STORE")): os.remove(os.path.abspath(sysFolder + "/.DS_STORE"))
 
-INPUTS = [(COMPARE_VARYING_LEN, refFolder, sysFolder, outputFolder, 2002, LEAVE_STOP_WORDS)]
+INPUTS = [(COMPARE_SAME_LEN, refFolder, sysFolder, outputFolder, 2002, LEAVE_STOP_WORDS)]
     # EXAMPLES:
     # (COMPARE_VARYING_LEN, 'data/DUC2002/SEE.model_edited.abstracts.in.edus', 'data/DUC2002/SEE.peer_abstracts.in.sentences', '2002_diffLens.csv', 2002, LEAVE_STOP_WORDS),
     # (COMPARE_SAME_LEN, 'data/DUC2001/see.models', 'data/DUC2001/submissions.for.SEE', '2001_sameLen_noStops.csv', 2001, REMOVE_STOP_WORDS),
@@ -85,6 +85,8 @@ def getComparisonOptions(folderSystems, folderModels):
 
     # iterate through the filenames and keep the info according to the filename parts:
     for filename in os.listdir(folderSystems):
+        if ".txt" in filename:
+            continue
         nameParts = filename.split('.')
         if len(nameParts) < 5:
             continue
@@ -93,13 +95,13 @@ def getComparisonOptions(folderSystems, folderModels):
         summaryLength = nameParts[2]
         systemName = nameParts[4]
 
-        # MultiDoc (e.g.: D061.M.010.J.16.txt)
+        # MultiDoc (e.g.: D061.M.010.J.16.html)
         if nameParts[1] == 'M':
             taskNames['M'][taskName] = 1
             summaryLengths['M'][summaryLength] = 1
             systemNames['M'][systemName] = 1
 
-        # PerDoc (e.g.: D061.P.100.J.16.AP880916-0060.txt)
+        # PerDoc (e.g.: D061.P.100.J.16.AP880916-0060.html)
         elif nameParts[1] == 'P':
             taskNames['P'][taskName] = 1
             summaryLengths['P'][summaryLength] = 1
@@ -107,6 +109,7 @@ def getComparisonOptions(folderSystems, folderModels):
 
     # remove the model names from the system names found:
     for filename in os.listdir(folderModels):
+        if ".DS" in filename or ".csv" in filename or ".txt" in filename: continue
         nameParts = filename.split('.')
         if len(nameParts) < 5:
             continue
