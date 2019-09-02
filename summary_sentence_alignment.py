@@ -81,7 +81,12 @@ if __name__ == "__main__":
             if overlap_threshold(current_summary_sent, best_sentence[1]):
                 aligned_tuple.extend([str(best_sentence[0])+":"+best_sentence[1], best_sentence[2]])
             else:
-                aligned_tuple.extend([None,None])
+                if i == 0:
+                    aligned_tuple.extend([None,None])
+                    aligned_tuple.extend([None,None])
+                    break
+                elif i == 1:
+                    aligned_tuple.extend([None, None])
         aligned_tuple = tuple(aligned_tuple)
         alignment_dataset.append(aligned_tuple)
 

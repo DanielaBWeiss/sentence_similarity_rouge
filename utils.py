@@ -2,15 +2,18 @@ import os
 import pandas as pd
 from spacy.lang.en import English
 from spacy.lang.en.stop_words import STOP_WORDS
+from nltk.tokenize import sent_tokenize
 
 
 TEMP_SUMM_SENTS = "temp_summ_sents"
 
-def split_sentences(raw_text):
-    nlp = English()
-    nlp.add_pipe(nlp.create_pipe('sentencizer'))
-    doc = nlp(raw_text)
-    sentences = [sent.string.strip() for sent in doc.sents if len(sent.string.strip("\n")) > 0]
+def split_sentences(doc):
+    sentences = sent_tokenize(doc)
+    for j in reversed(range(len(sentences))):
+        sent = sentences[j]
+        sentences[j] = sent.strip()
+        if sent == '':
+            sentences.pop(j)
     return sentences
 
 #creating a file for each sentence in the input document
