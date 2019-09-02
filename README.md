@@ -1,6 +1,6 @@
 # SC
 
-###Experimenting with Sentence Consolidation
+### Experimenting with Sentence Consolidation
 
 
 **Current work**
@@ -15,7 +15,7 @@ https://arxiv.org/pdf/1906.00077.pdf
 
 Code parts for calculating sentence similarity using Rougeis taken from: https://github.com/oriern/SummEval_referenceSubsets/tree/master/code_score_extraction
 
-#####To Run the Code
+##### To Run the Code
 
 Follow instruction on Rouge installation here:
 https://github.com/OriShapira/SummEval_referenceSubsets
