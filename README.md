@@ -1,11 +1,12 @@
-# SC
+# Aligning Sentences
 
-### Experimenting with Sentence Consolidation
+### Experimenting with Sentence Similarity using Rouge Averages
 
 
 **Current work**
 
 Currently this repository is intended to experiment with the Rouge similarity scores between document and summary sentences.
+The goal is to understand if using rouge as a semantic similarity measure between sentences is a good enough indicator as sentences that should be consolidated together.
 
 The data I use is multi-document dataset - DUC-04
 (Can be found here - https://duc.nist.gov/duc2004/tasks.html)
