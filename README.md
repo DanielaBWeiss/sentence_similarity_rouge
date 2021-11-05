@@ -3,7 +3,7 @@
 ### Experimenting with Sentence Similarity using Rouge Averages
 
 
-**Current work**
+#### Current work**
 
 Currently this repository is intended to experiment with the Rouge similarity scores between document and summary sentences.
 The goal is to understand if using rouge as a semantic similarity measure between sentences is a good enough indicator as sentences that should be consolidated together.
@@ -19,7 +19,7 @@ The intuition is that summary sentences are created using one or a merge of more
 
 Some code parts for using Rouge library is taken from: https://github.com/oriern/SummEval_referenceSubsets/tree/master/code_score_extraction
 
-##### To Run the Code
+#### To Run the Code
 
 Follow instruction on Rouge installation here:
 https://github.com/OriShapira/SummEval_referenceSubsets
